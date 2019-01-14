@@ -1,0 +1,23 @@
+---
+# For Server install packages
+- name: Install packages for LDAP-Server
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ PACKAGES_SERVER }}"
+  notify:
+    - restarted ldap server
+
+- name: start ldap server
+  systemd:
+    name: slapd
+    state: started
+    enabled: yes
+
+- name: Check ldap server Port is listening
+  wait_for:
+    port: 389
+    delay: 5
+    timeout: 10
+    msg: "Timeout waiting for 389 to respond"
+  ignore_errors: yes

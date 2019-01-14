@@ -1,0 +1,12 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+# for ldap server
+{% for ip in groups['server'] %}
+{{ ip }} {{ SERVER_FQDN }} {{ hostvars[ip].ansible_hostname }}
+{% endfor %}
+
+# for other hosts
+{% for ip in groups['clients'] %}
+{{ ip }} {{ hostvars[ip].ansible_hostname }}
+{% endfor %}

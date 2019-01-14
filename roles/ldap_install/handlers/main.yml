@@ -1,0 +1,20 @@
+---
+# handlers file for ldap_install
+
+- name: restarted ldap server
+  systemd:
+    name: slapd
+    state: restarted
+    enable: yes
+
+- name: restarted ldap client
+  systemd:
+    name: nslcd
+    state: restarted
+    enabled: yes
+
+- name: restarted chrony
+  systemd:
+    name: chronyd
+    state: restarted
+    enabled: yes

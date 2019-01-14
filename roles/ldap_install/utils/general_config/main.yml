@@ -1,0 +1,35 @@
+---
+# config hosts file
+- name: Build hosts file
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+
+- name: check if epel is installed
+  yum:
+    list: installed
+  register: pkg
+
+# This install EPEL
+- name: Add repository for EPEL
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+  # jinja2 语法针对输出自动进行自循环过滤出想要的字段并转换成 list
+  when: (pkg.results | selectattr('name', 'search', '^epel-release$') | map(attribute='yumstate') | list | length) == 0
+
+- name: yum-clean-all
+  command: yum clean all
+  args:
+    warn: no
+
+- name: Ensure the yum package index is up to Date
+  yum:
+    update_cache: yes
+    name: '*'
+    state: latest
+
+# 是否配置时钟同步服务器
+- name: chrony setup
+  include: utils/chrony_ntp/main.yml
+  when: CHRONY_NTP == 0

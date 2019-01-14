@@ -1,5 +1,18 @@
-[ldap_server]
+[server]
 172.16.10.220
 
-[ldap_client]
+[clients]
 172.16.10.10
+172.16.10.11
+
+[chrony]
+172.16.10.220
+
+[server:vars]
+server_role=server
+
+[clients:vars]
+server_role=client
+
+
+

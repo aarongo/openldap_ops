@@ -1,0 +1,15 @@
+---
+# For Ldap client
+- name: Install packages for ldap_clients
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ PACKAGES_CLIENTS }}"
+  notify:
+    - restarted ldap client
+
+- name: start ldap client
+  systemd:
+    name: nslcd
+    state: started
+    enabled: yes
