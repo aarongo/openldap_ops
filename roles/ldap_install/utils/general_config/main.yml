@@ -28,8 +28,3 @@
     update_cache: yes
     name: '*'
     state: latest
-
-# 是否配置时钟同步服务器
-- name: chrony setup
-  include: utils/chrony_ntp/main.yml
-  when: CHRONY_NTP == 0

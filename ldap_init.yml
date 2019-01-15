@@ -3,9 +3,3 @@
 - hosts: all
   roles:
     - ldap_install
-#- name: test
-#  hosts: all
-#  tasks:
-#  - name: test
-#    debug:
-#      msg: "{{ hostvars[inventory_hostname].group_names[0] }}"
