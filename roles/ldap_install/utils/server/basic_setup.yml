@@ -1,0 +1,55 @@
+---
+# For server install packages
+- name: Install packages for LDAP-server
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ PACKAGES_SERVER }}"
+
+- name: tranfer ldap.conf configuration file
+  template:
+    src: ldap.conf.j2
+    dest: "{{ app_path }}/ldap.conf"
+
+- name: tranfer access.conf configuration for ACL
+  template:
+    src: ldap_access.conf.j2
+    dest: "{{ app_path }}/access.conf"
+
+- name: copy default db
+  copy:
+    src: /usr/share/openldap-servers/DB_CONFIG.example
+    dest: "{{ db_path }}/DB_CONFIG"
+    owner: "{{ ldap_user }}"
+    group: "{{ ldap_user }}"
+    remote_src: yes
+
+- name: change directory permiss for ldapserver
+  file:
+    dest: "{{ item }}"
+    owner: "{{ ldap_user }}"
+    gourp: "{{ ldap_user }}"
+    recurse: yes
+  with_items:
+    - "{{ db_path }}"
+    - "{{ config_path }}"
+  ignore_errors: yes
+
+- name: start ldap server
+  systemd:
+    name: slapd
+    state: started
+    enabled: yes
+
+- name: delete directory config for ldaperver
+  file:
+    path: "{{ config_path }}"
+    state: absent
+
+- name: create directory config for ldapserver
+  file:
+    path: "{{ config_path }}"
+    state: directory
+    owner: "{{ ldap_user }}"
+    group: "{{ ldap_user }}"
+

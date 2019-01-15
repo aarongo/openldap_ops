@@ -1,5 +1,8 @@
 ---
 # For LDAP Install Base Part
+# server
+CHRONY_NTP: true
+SERVER_FQDN: laoshiren.ldapserver.com
 PACKAGES_SERVER:
   - openldap
   - compat-openldap
@@ -12,8 +15,6 @@ PACKAGES_CLIENTS:
   - openldap-clients
   - nss-pam-ldapd
 
-CHRONY_NTP: 0
-
 NETWORK_NET_SERVER:
   - s2c.time.edu.cn
   - s2m.time.edu.cn
@@ -21,7 +22,3 @@ NETWORK_NET_SERVER:
   - 3.cn.pool.ntp.org
   - 0.centos.pool.ntp.org
   - 3.centos.pool.ntp.org
-
-SERVER_FQDN: laoshiren.ldapserver.com
-
-

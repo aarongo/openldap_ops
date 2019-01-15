@@ -1,0 +1,17 @@
+---
+- name: restarted ldap server
+  systemd:
+    name: slapd
+    state: restarted
+
+- name: copy base domain config
+  template:
+    src: base_domain.ldif.j2
+    dest: /tmp/base_domain.ldif
+
+- name: add the base domain
+  shell: "ldapadd -x -D 'cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}' -w {{ ROOTPW }} -f /tmp/base_domain.ldif"
+  register: add_domain
+
+- debug:
+    msg: "{{ add_domain.stdout_lines }}"

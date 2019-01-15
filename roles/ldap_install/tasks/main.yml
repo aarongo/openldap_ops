@@ -3,10 +3,14 @@
 - name: general config
   include: utils/general_config/main.yml
 
+- name: chrony setup
+  include: utils/chrony_ntp/main.yml
+  when: CHRONY_NTP
+
 - name: server install base package
-  include: utils/server_init/main.yml
+  include: server.yml
   when: server_role == 'server'
 
-- name: client install base package
-  include: utils/client_init/main.yml
-  when: server_role == 'client'
+#- name: client install base package
+#  include: utils/client_init/main.yml
+#  when: server_role == 'client'

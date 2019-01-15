@@ -1,0 +1,15 @@
+---
+- name: transfer slapd.conf configuation file
+  template:
+    src: slapd.conf.j2
+    dest: "/tmp/slapd.conf"
+
+- name: cover slapd.conf to ldap configuation
+  shell: slaptest -f /tmp/slapd.conf -F {{ config_path }}
+
+- name: change directory permiss for ldapserver
+  file:
+    dest: "{{ config_path }}"
+    owner: "{{ ldap_user }}"
+    group: "{{ ldap_user }}"
+    recurse: yes

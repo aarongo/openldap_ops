@@ -1,0 +1,12 @@
+---
+# For ldap log path and level
+- name: enable ldap log recording
+  blockinfile:
+    path: /etc/rsyslog.conf
+    block: |
+      {{ item.info }}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
+  with_items:
+    - { name: ldap-log, info: "local4.* /var/log/ldap.log"}
+  notify:
+    - restart rsyslog

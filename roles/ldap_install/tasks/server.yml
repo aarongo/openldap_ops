@@ -1,0 +1,19 @@
+---
+- name: Add server specific varibles
+  include_vars: server.yml
+
+- name: base setup configure
+  include: utils/server/basic_setup.yml
+
+- name: generate keys for server
+  include: utils/server/general_keys.yml
+  when: ENABLE_SSL
+
+- name: expansion cover slapd.conf
+  include: utils/server/expansion_cover.yml
+
+- name: expansion ldap log
+  include: utils/server/expansion_log.yml
+
+- name: add the base domain
+  include: utils/server/base_domain.yml
