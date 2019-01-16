@@ -2,3 +2,13 @@
 PACKAGES_CLIENTS:
   - openldap-clients
   - nss-pam-ldapd
+keys_path: /etc/openldap/certs
+cert_name: cert.crt
+client_cacerts: /etc/openldap/cacerts
+
+authconfig_command: --enableldap --enableldapauth
+  --enableldaptls --disablesssd --enablemd5
+  --enablelocauthorize  --enableshadow
+  --ldapserver=ldap://{{ SERVER_FQDN }}
+  --ldapbasedn="dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}"
+  --enablemkhomedir --update

@@ -1,0 +1,33 @@
+---
+# For Ldap client
+- name: Install packages for ldap_clients
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ PACKAGES_CLIENTS }}"
+
+- name: auto config for ldap client
+  shell: "authconfig {{ authconfig_command }}"
+  register: auth_result
+
+
+- name: copy key files to client
+  get_url:
+    url: "http://{{ SERVER_FQDN }}/cert.crt"
+    dest: "{{ client_cacerts }}/cert.crt"
+
+- debug:
+    msg: "{{ auth_result.stdout_lines }}"
+
+- name: copy ldap and nslcd config
+  template:
+    src: "{{ item.name }}"
+    dest: "{{ item.path }}"
+  with_items:
+    - { name: "ldap.conf.j2", path: "/etc/openldap/ldap.conf"}
+    - { name: "nslcd.conf.j2", path: "/etc/nslcd.conf"}
+
+- name: restart ldap client
+  systemd:
+    name: nslcd
+    state: restarted
