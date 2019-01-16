@@ -1,4 +1,8 @@
 ---
 - name: add client
   include: client.yml
-  when: install
+  when: install_client
+
+- name: add sudo ssh conf
+  include: sudo_ssh.yml
+  when: sudo_ssh
