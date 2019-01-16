@@ -1,0 +1,13 @@
+---
+- hosts: all
+  roles:
+    - { role: prepare}
+    - { role: chrony, CHRONY_NTP: true}
+
+- hosts: server
+  roles:
+    - { role: ldap_server, INSTALL: true}
+
+- hosts: server
+  roles:
+    - { role: ldap_expan, add_memberof: false, add_web: true}

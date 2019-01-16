@@ -1,0 +1,19 @@
+---
+app_path: /etc/openldap
+config_path: /etc/openldap/slapd.d
+db_path: /var/lib/ldap
+ldap_user: ldap
+ROOTPW: K7KdHqkEed
+
+#The self signed ssl parameters
+Country: CN
+State: Shenzhen
+Location: Shenzhen
+Organization: IT
+
+ENABLE_SSL: true
+
+# base organization
+ORG_USER: Users
+ORG_GROUP: Groups
+ORG_MANAGERS: Managers

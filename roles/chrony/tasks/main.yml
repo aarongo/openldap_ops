@@ -1,0 +1,4 @@
+# chrony config
+- name: chrony setup
+  include: 02-chrony.yml
+  when: CHRONY_NTP

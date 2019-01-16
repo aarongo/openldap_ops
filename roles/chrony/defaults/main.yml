@@ -1,0 +1,8 @@
+---
+NETWORK_NET_SERVER:
+  - s2c.time.edu.cn
+  - s2m.time.edu.cn
+  - 0.cn.pool.ntp.org
+  - 3.cn.pool.ntp.org
+  - 0.centos.pool.ntp.org
+  - 3.centos.pool.ntp.org

@@ -1,0 +1,7 @@
+- name: add memberof
+  include: add_memberof.yml
+  when: add_memberof
+
+- name: add phpadmin
+  include: add_browe.yml
+  when: add_web

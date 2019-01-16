@@ -1,5 +1,0 @@
----
-# This for Ldap INIT
-- hosts: all
-  roles:
-    - ldap_install

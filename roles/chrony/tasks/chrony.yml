@@ -1,0 +1,22 @@
+---
+# config ntp
+- name: check chrony if exist
+  yum:
+    list: installed
+  register: pkg
+
+- name: setup ntp auto sync internet
+  yum:
+    name: chrony
+    state: latest
+  when: (pkg.results | selectattr('name', 'search', '^chrony$') | map(attribute='yumstate') | list | length) == 0
+
+- name: setup sync internet time for all server
+  template:
+    src: chrony.conf.j2
+    dest: /etc/chrony.conf
+
+- name: restarted chrony
+  systemd:
+    name: chronyd
+    state: restarted

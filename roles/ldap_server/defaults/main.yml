@@ -1,0 +1,10 @@
+---
+# For LDAP Install Base Part
+# server
+PACKAGES_SERVER:
+  - openldap
+  - compat-openldap
+  - openldap-servers
+  - openldap-clients
+  - openldap-servers-sql
+  - openldap-devel

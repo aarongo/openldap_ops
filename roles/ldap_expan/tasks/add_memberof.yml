@@ -1,0 +1,12 @@
+---
+- name: add memberof to ldap server
+  copy:
+    src: memberof.ldif
+    dest: /tmp/memberof.ldif
+
+- name: apply memberof for ldap server
+  shell: ldapadd -x -D 'cn=config' -w {{ ROOTPW }} -f /tmp/memberof.ldif
+  register: memberof_result
+
+- debug:
+    msg: "{{ memberof_result.stdout_lines}}"

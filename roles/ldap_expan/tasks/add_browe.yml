@@ -1,0 +1,21 @@
+---
+- name: read self config
+  include_vars: browe.yml
+
+- name: install package for ldap web browe
+  yum:
+    name: phpldapadmin
+    state: latest
+
+- name: setup http allow all access
+  lineinfile:
+    path: "{{ http_config_path }}"
+    regexp: '(\s+)Require local'
+    line: '    Require all granted'
+
+- name: setup phpadmin access by dn
+  shell: sed -i "s/servers->setValue('login','attr','uid')/servers->setValue('login','attr','dn')/" /etc/phpldapadmin/config.php
+  args:
+    warn: no
+  notify:
+    - restart httpd
