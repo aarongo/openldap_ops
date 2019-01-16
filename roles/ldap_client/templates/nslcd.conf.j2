@@ -1,0 +1,13 @@
+# The user and group nslcd should run as.
+uid nslcd
+gid ldap
+
+uri ldap://{{ SERVER_FQDN }}
+
+# The distinguished name of the search base.
+base dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+
+ssl start_tls
+tls_cacertdir {{ client_cacerts }}
+tls_cacertfile {{ client_cacerts }}/cert.crt
+tls_reqcert never
