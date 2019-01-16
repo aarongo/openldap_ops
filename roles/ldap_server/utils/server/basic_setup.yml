@@ -6,10 +6,10 @@
     state: latest
   with_items: "{{ PACKAGES_SERVER }}"
 
-- name: tranfer ldap.conf configuration file
+- name: tranfer ldap.conf.j2 configuration file
   template:
-    src: ldap.conf.j2
-    dest: "{{ app_path }}/ldap.conf"
+    src: ldap.conf.j2.j2
+    dest: "{{ app_path }}/ldap.conf.j2"
 
 - name: tranfer access.conf configuration for ACL
   template:

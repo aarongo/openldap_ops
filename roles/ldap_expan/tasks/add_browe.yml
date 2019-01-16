@@ -19,3 +19,8 @@
     warn: no
   notify:
     - restart httpd
+
+- name: copy server certs to web root
+  shell: "cp {{ keys_path }}/{{ cert_name }} /var/www/html/"
+  args:
+    warn: no
