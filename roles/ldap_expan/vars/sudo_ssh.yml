@@ -1,0 +1,7 @@
+---
+openldap_conf: /etc/openldap/slapd.d
+schema_path: /etc/openldap/schema
+sudo_schema: sudo.schema
+ssh_schema: openssh-lpk-openldap.schema
+
+org_sudo: sudoers

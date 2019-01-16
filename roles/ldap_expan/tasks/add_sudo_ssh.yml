@@ -1,0 +1,90 @@
+---
+- name: include vars
+  include_vars: sudo_ssh.yml
+
+- name: check system exist sudo openldap, get path
+  shell: rpm -qal | grep sudo | grep -i "schema.OpenLDAP"
+  args:
+    warn: no
+  register: sudo_result
+
+- debug:
+    msg: "{{ sudo_result.stdout_lines[0] }}"
+
+- name: copy file sudo openldap
+  copy:
+    src: "{{ sudo_result.stdout_lines[0] }}"
+    dest: "{{ schema_path }}/{{ sudo_schema }}"
+    remote_src: yes
+
+- name: check ssh package in system
+  yum:
+    list: installed
+  register: pkg
+
+- name: install openssh-ldap
+  yum:
+    name: openssh-ldap
+    state: latest
+  # jinja2 语法针对输出自动进行自循环过滤出想要的字段并转换成 list
+  when: (pkg.results | selectattr('name', 'search', '^openssh-ldap$') | map(attribute='yumstate') | list | length) == 0
+
+- name: use generate file
+  shell: rpm -qal | grep openssh-ldap | grep -i "openldap.schema"
+  args:
+    warn: no
+  register: ssh_result
+
+- name: copy ssh file openldap schema
+  copy:
+    src: "{{ ssh_result.stdout_lines[0] }}"
+    dest: "{{ schema_path }}/"
+    remote_src: yes
+
+- name: copy ssh_sudo conf
+  template:
+    src: sudo_ssh.conf.j2
+    dest: /tmp/sudo_ssh.conf
+
+- name: slaptest config for ssh and sudo
+  shell: slaptest -f /tmp/sudo_ssh.conf -F {{ openldap_conf }}
+  register: slaptest_result
+
+- debug:
+    # msg: "{{ slaptest_result.stdout_lines }}"
+    msg: "{{ slaptest_result }}"
+
+- name: change directory permiss for ldapserver
+  file:
+    dest: "{{ openldap_conf }}"
+    owner: "{{ ldap_user }}"
+    group: "{{ ldap_user }}"
+    recurse: yes
+
+- name: restart slapd
+  systemd:
+    name: slapd
+    state: restarted
+
+- name: config web xml
+  copy:
+    src: sudo.xml
+    dest: /usr/share/phpldapadmin/templates/creation/sudo.xml
+
+- name: config web attr xml
+  copy:
+    src: sudo_attr.xml
+    dest: /usr/share/phpldapadmin/templates/modification/sudo.xml
+
+- name: copy sudoer gorup conf
+  template:
+    src: add_org.ldif.j2
+    dest: /tmp/add_org.ldif
+
+- name: add sudoers groups and default sudo role for ldap server
+  shell: ldapadd -x -D 'cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}' -w {{ ROOTPW }} -f /tmp/add_org.ldif
+  register: org_sudo
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ org_sudo.stdout_lines}}"

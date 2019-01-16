@@ -5,3 +5,7 @@
 - name: add phpadmin
   include: add_browe.yml
   when: add_web
+
+- name: add ssh-sudo
+  include: add_sudo_ssh.yml
+  when: sudo_ssh

@@ -1,5 +1,5 @@
 ---
-- name: read self config
+- name: read self config vars
   include_vars: browe.yml
 
 - name: install package for ldap web browe

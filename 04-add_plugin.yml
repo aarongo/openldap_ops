@@ -1,4 +1,4 @@
 ---
 - hosts: server
   roles:
-    - { role: ldap_expan, add_memberof: false, add_web: true}
+    - { role: ldap_expan, add_memberof: false, add_web: false, sudo_ssh: true}
