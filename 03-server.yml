@@ -1,4 +1,4 @@
 ---
 - hosts: server
   roles:
-    - { role: ldap_server, INSTALL: true}
+    - { role: ldap_server, install_server: true }

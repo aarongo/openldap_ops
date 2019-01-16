@@ -1,4 +1,4 @@
 ---
 - name: server install base package
   include: server.yml
-  when: INSTALL
+  when: install_server

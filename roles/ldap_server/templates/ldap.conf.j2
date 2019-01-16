@@ -1,27 +1,13 @@
-#
-# LDAP Defaults
-#
-
-# See ldap.conf(5) for details
-# This file should be world readable but not world writable.
-
-#BASE	dc=example,dc=com
-#URI	ldap://ldap.example.com ldap://ldap-master.example.com:666
-
-#SIZELIMIT	12
-#TIMELIMIT	15
-#DEREF		never
 BASE	dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
 {% if ENABLE_SSL %}
-URL ldaps://{{ SERVER_FQDN }}
+URL ldap://{{ SERVER_FQDN }}
 TLS_CACERTDIR	{{ app_path }}/certs
 TLS_CACERT {{ app_path }}/certs/cert.crt
 TLS_REQCERT never
 {% else %}
+TLS_CACERTDIR	{{ app_path }}/certs
 URL ldap://{{ SERVER_FQDN }}
 {% endif %}
-
-
 
 # Turning this off breaks GSSAPI used with krb5 when rdns = false
 SASL_NOCANON	on
