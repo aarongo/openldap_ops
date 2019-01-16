@@ -1,4 +1,4 @@
 ---
 - hosts: all
   roles:
-    - { role: chrony, CHRONY_NTP: true}
+    - { role: chrony, CHRONY_NTP: true  }
