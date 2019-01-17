@@ -1,6 +1,0 @@
-# 为客户端配置的ssh 与 sudo 支持
-uri ldap://{{ SERVER_FQDN }}
-ssl start_tls
-TLS_CACERTDIR {{ client_cacerts }}
-TLS_CACERT {{ client_cacerts }}/cert.crt
-TLS_REQCERT never
