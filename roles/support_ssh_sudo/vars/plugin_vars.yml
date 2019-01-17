@@ -1,0 +1,3 @@
+---
+client_cacerts: /etc/openldap/cacerts
+org_sudo: sudoers

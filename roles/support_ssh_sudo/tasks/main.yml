@@ -1,0 +1,7 @@
+---
+- name: import ssh、sudo-ssh vars
+  include_vars: plugin_vars.yml
+
+- name: 配置客户端支持sudo与 ssh-key
+  include: client_ssh_sudo.yml
+  when: support
