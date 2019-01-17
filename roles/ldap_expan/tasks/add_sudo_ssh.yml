@@ -51,7 +51,6 @@
   register: slaptest_result
 
 - debug:
-    # msg: "{{ slaptest_result.stdout_lines }}"
     msg: "{{ slaptest_result }}"
 
 - name: change directory permiss for ldapserver
