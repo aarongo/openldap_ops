@@ -1,0 +1,13 @@
+dn: cn=module{0},cn=config
+changetype: modify
+add: olcModuleLoad
+olcModuleLoad: ppolicy.la
+
+dn: olcOverlay=ppolicy,olcDatabase={2}hdb,cn=config
+changeType: add
+objectClass: olcOverlayConfig
+objectClass: olcPPolicyConfig
+olcOverlay: ppolicy
+olcPPolicyDefault: cn={{ ppolicy_default }},ou={{ ppolicy_ou }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+olcPPolicyHashCleartext: TRUE
+olcPPolicyUseLockout: TRUE

@@ -9,3 +9,7 @@
 - name: add ssh-sudo
   include: add_sudo_ssh.yml
   when: sudo_ssh
+
+ - name: add ppolicy
+   include: add_ppolicy.yml
+   when: ppolicy

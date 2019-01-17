@@ -1,0 +1,27 @@
+dn: ou={{ ppolicy_ou }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+objectClass: organizationalUnit
+objectClass: top
+ou: {{ ppolicy_ou }}
+
+dn: cn={{ ppolicy_default }},ou={{ ppolicy_ou }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+cn: {{ ppolicy_default }}
+objectClass: top
+objectClass: device
+objectClass: pwdPolicy
+objectClass: pwdPolicyChecker
+pwdAllowUserChange: TRUE
+pwdAttribute: userPassword
+pwdCheckQuality: 2
+pwdExpireWarning: 604800
+pwdFailureCountInterval: 0
+pwdGraceAuthnLimit: 5
+pwdInHistory: 5
+pwdLockout: TRUE
+pwdLockoutDuration: 600
+pwdMaxAge: 0
+pwdMaxFailure: 5
+pwdMinAge: 0
+pwdMinLength: 8
+pwdMustChange: FALSE
+pwdSafeModify: FALSE
+pwdCheckModule: check_password.so

@@ -1,0 +1,26 @@
+---
+- name: copy base/ppolicy/acl config for ppolicy
+  template:
+    src: "{{ item.src }}"
+    dest: "/tmp/{{ item.dest }}"
+  with_items:
+    - { src: "add_ppolicy.ldif.j2", dest: "add_ppolicy.ldif" }
+    - { src: "ppolicy_org.ldif.j2", dest: "ppolicy_org.ldif" }
+    - { src: "ppolicy_acl.ldif", dest: "ppolicy_acl.ldif" }
+
+- name: setup base config
+  shell: "ldapadd -x -D 'cn=config' -w {{ ROOTPW }} -f {{ item }}"
+  with_items:
+    - /tmp/add_ppolicy.ldif
+    - /tmp/ppolicy_acl.ldif
+  register: base_result
+
+- debug:
+    msg: "{{ base_result.stdout_lines }}"
+
+- name: add ppolicy group and default role
+  shell: ldapadd -x -D 'cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}' -w {{ ROOTPW }} -f /tmp/ppolicy_org.ldif
+  register: default_role
+
+- debug:
+    msg: "{{ default_role.stdout_lines }}"

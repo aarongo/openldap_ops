@@ -8,7 +8,7 @@
 - hosts: server
   roles:
     - { role: ldap_server, install_server: true, ENABLE_SSL: true}
-    - { role: ldap_expan, add_memberof: true, add_web: true, sudo_ssh: true}
+    - { role: ldap_expan, add_memberof: true, add_web: true, sudo_ssh: true, ppolicy: true}
 
 # 客户端配置，开启 TSL/SSL、配置使用 sudo 与 ssh-key
 - hosts: clients
