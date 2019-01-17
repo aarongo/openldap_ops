@@ -1,5 +1,4 @@
 ---
-org_sudo: sudoers
 PACKAGES_CLIENTS:
   - openldap-clients
   - nss-pam-ldapd

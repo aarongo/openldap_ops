@@ -21,14 +21,11 @@
 
 - name: copy client ldap config for enable TLS/SSL
   template:
-    src: ldap.conf.j2
-    dest: /etc/openldap/ldap.conf
-
-- name: copy client nslcd config for enable TLS/SSL
-  template:
-    src: nslcd.conf.j2
-    dest: /etc/nslcd.conf
-
+    src: "{{ item.name }}"
+    dest: "{{ item.path }}"
+  with_items:
+    - { name: "ldap.conf.j2", path: "/etc/openldap/ldap.conf" }
+    - { name: "nslcd.conf.j2", path: "/etc/nslcd.conf" }
 
 - name: restart ldap client
   systemd:

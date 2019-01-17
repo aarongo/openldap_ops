@@ -3,6 +3,8 @@
 
 [clients]
 172.16.10.10
+
+[new_client]
 172.16.10.11
 
 [chrony]
