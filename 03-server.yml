@@ -1,4 +1,6 @@
 ---
 - hosts: server
   roles:
-    - { role: ldap_server, install_server: true }
+    - { role: prepare}
+    - { role: chrony, CHRONY_NTP: true}
+    - { role: ldap_server, install_server: true, ENABLE_SSL: true}

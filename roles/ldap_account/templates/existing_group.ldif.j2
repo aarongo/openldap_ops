@@ -1,0 +1,4 @@
+dn: cn={{ group_name }},ou=Groups,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+changetype: modify
+add: memberuid
+memberuid: {{ user_name }}

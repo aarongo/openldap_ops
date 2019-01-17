@@ -1,0 +1,11 @@
+{
+  "user_name": "lyl2",
+  "user_passwd": "1qazxsw2",
+  "group_name": "linux_users",
+  "user_id": "1014",
+  "group_id": "505",
+  "mail": "liuyulong@jiumiaodai.com",
+  "create_group": false,
+  "create_user": true,
+  "add_group": true
+}

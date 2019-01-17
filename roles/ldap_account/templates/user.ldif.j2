@@ -1,0 +1,16 @@
+dn: uid={{ user_name }},ou=Users,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+givenName: {{ user_name }}
+cn: {{ user_name }}
+sn: Linux
+userPassword: {{ u_password.stdout_lines[0] }}
+loginShell: /bin/bash
+uid: {{ user_name }}
+uidNumber: {{ user_id }}
+gidNumber: {{ group_id }}
+homeDirectory: /home/{{ user_name }}
+mail: {{ mail }}
+pwdReset: TRUE

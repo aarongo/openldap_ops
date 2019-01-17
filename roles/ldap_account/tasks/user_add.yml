@@ -1,0 +1,16 @@
+---
+- name: general SSHA
+  shell: slappasswd -h {SSHA} -s {{ user_passwd }}
+  register: u_password
+
+- name: copy user ldif
+  template:
+    src: user.ldif.j2
+    dest: /tmp/user.ldif
+
+- name: create user
+  shell: ldapadd -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/user.ldif
+  register: create_result
+
+- debug:
+    msg: "{{ create_result.stdout_lines }}"

@@ -1,0 +1,12 @@
+---
+- name: copy group ldif
+  template:
+    src: group.ldif.j2
+    dest: /tmp/group.ldif
+
+- name: create group
+  shell: ldapadd -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/group.ldif
+  register: create_result
+
+- debug:
+    msg: "{{ create_result.stdout_lines }}"

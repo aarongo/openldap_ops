@@ -1,0 +1,12 @@
+---
+- name: copy add user to group ldif
+  template:
+    src: existing_group.ldif.j2
+    dest: /tmp/existing_group.ldif
+
+- name: Add an user an existing group
+  shell: ldapadd -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/existing_group.ldif
+  register: exist_group
+
+- debug:
+    msg: "{{ exist_group.stdout_lines }}"
