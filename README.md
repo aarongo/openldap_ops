@@ -1,6 +1,13 @@
 # LDAP Installation
 
-## 说明放到最前
+## 软件版本信息
+
+| 软件 | 版本 | 备注 |
+| :---: | :---: | :---: |
+| os | CentOS Linux release 7.5.1804 (Core) | 
+| ldap | OpenLDAP: slapd 2.4.44 (Oct 30 2018 23:14:27)
+
+## 放到开头
 
 ```txt
 minPoints 2
@@ -66,26 +73,118 @@ ldapsearch -x -D cn=config -b "cn=config" -w K7KdHqkEed -LLL dn
     - { role: support_ssh_sudo, support: true}
 ```
 
-## 运行过程
+## 分步运行顺序
 
-0. ansible-playbook 00-setup.yml
-1. ansible-playbook 01-prepare.yml
-2. ansible-playbook 02-chrony.yml
-3. ansible-playbook 03-server.yml
-4. ansible-playbook 04-add_plugin.yml
-5. ansible-playbook 05-client.yml
-6. ansible-playbook 06-addclient.yml
-7. ansible-playbook 07-addaccount.yml 
+1. ansible-playbook 00-setup.yml
+2. ansible-playbook 01-prepare.yml
+3. ansible-playbook 02-chrony.yml
+4. ansible-playbook 03-server.yml
+5. ansible-playbook 04-add_plugin.yml
+6. ansible-playbook 05-client.yml
+7. ansible-playbook 06-addclient.yml
+8. ansible-playbook 07-addaccount.yml --extra-vars "@account_json.json"
 
-**7**:运行时参数说明:
+### 分步运行说明
+
+- `ansible-playbook 01-prepare.yml` 基础准备配置
+    - 配置主机 `hosts` 文件
+    - 增加 `epel`源
+    - 更新系统软件
+
+    ```yaml
+    # 所有主机进行基础准备配置
+    - hosts: all
+      roles:
+        - { role: prepare }
+    ```
+- `ansible-playbook 02-chrony.yml` 时钟服务器配置
+    - 安装 `chrony`同步工具
+    - 配置主服务器同步 `internet`，其他服务器同步主服务器
+    
+    **CHRONY_NTP:true** 是否进行时钟同步配置
+    
+    ```yaml
+    - hosts: all
+      roles:
+        - { role: chrony, CHRONY_NTP: true  }
+    ```
+-  `ansible-playbook 03-server.yml` server端配置
+    -  安装基本软件
+    -  配置是否开启 TLS/SSL（`ENABLE_SSL: true`)
+    -  开启服务日志
+    -  生成自签名证书
+    -  创建基础`cn`信息
+    -  配置`server`生效
+
+    **install_server: true** 是否安装`server`端
+
+    ```yaml
+    - hosts: server
+      roles:
+        - { role: prepare}
+        - { role: chrony, CHRONY_NTP: true}
+        - { role: ldap_server, install_server: true, ENABLE_SSL: true}
+    ```
+- `ansible-playbook 04-add_plugin.yml` 配置服务端额外功能
+    - 增加基础 memberof 属性
+    - 开启 `ldap-server`端 web 访问
+    - 开启`server`端 `sudo`配置
+    - 开启`server`端`ssh-key`配置
+    - 开启`server`端`ppolicy`密码策略配置
+
+    **`add_memberof: true` `add_web: true` `sudo_ssh: true` `ppolicy: true`** 配置开启与关闭安装额外功能
+
+    ```yaml
+    - hosts: server
+      roles:
+        - { role: ldap_expan, add_memberof: true, add_web: true, sudo_ssh: true, ppolicy: true}
+    ```
+- `ansible-playbook 05-client.yml` 安装客户端
+    - 使用自动命令`autoconfig`进行配置`client`端
+
+    **`install_client: true`** 配置是否进行客户端安装
+
+    ```yaml
+    - hosts: clients
+      roles:
+        - { role: ldap_client, install_client: true}
+    ```
+-  `ansible-playbook 06-addclient.yml` 新增客户端
+    -  引用`prepare`
+    -  引用`chrony`
+    -  引用`client`
+    -  开启`clien`支持`ssh`、`sudo`
+
+    **support: true** 是否开启 `sudo` `ssh`支持
+
+    ```yaml
+    - hosts: new_client
+      roles:
+        - { role: prepare}
+        - { role: chrony, CHRONY_NTP: true}
+        - { role: ldap_client, install_client: true}
+        - { role: support_ssh_sudo, support: true}
+    ```
+- `ansible-playbook 07-addaccount.yml  --extra-vars "@account_json.json"` 自定义添加组、用户信息等,使用 json 文件
+    - 添加组
+    - 添加用户
+    - 添加默认 `sudo` 组策略
+
+    ```yaml
+    - hosts: server
+      roles:
+        - ldap_account
+    ```
+
+**添加账号：8**:运行时参数说明:
 - `user_name`： 要创建的用户名
 - `user_id`: 要创建的用户 id （1000+）
 - `group_id`: 要创建的组 id（500+）
 - `mail`: 用户邮箱地址
 - `group_name`: 用户组名称
-- `create_group`: 是否创建 true|false
-- `create_user`: 是否要创建用户 true|false
-- `sudo_roles`: 是否开启默认sudo 组策略 | true|false
+- `create_group`: 是否创建 `true|false` （如果组存在不进行创建）
+- `create_user`: 是否要创建用户 `true|false`
+- `sudo_roles`: 是否开启默认sudo 组策略 | `true|false` （只需要在第一次配置组的 sudo 权限是开启）
 - `user_passwd`: 用户密码
 - `add_group`: 是否添加组
 
