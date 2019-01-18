@@ -1,2 +1,3 @@
 *.retry
-*.json
+account_json.json
+problem.txt

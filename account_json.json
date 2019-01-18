@@ -1,12 +1,12 @@
 {
-  "user_name": "user6",
+  "user_name": "user1",
   "user_passwd": "1qazxsw2",
-  "group_name": "dev_ops",
-  "user_id": "1006",
-  "group_id": "505",
+  "group_name": "ops",
+  "user_id": "1001",
+  "group_id": "500",
   "mail": "xxx@xxx.com",
-  "sudo_roles": false,
-  "create_group": false,
+  "sudo_roles": true,
+  "create_group": true,
   "create_user": true,
   "add_group": true
 }
