@@ -24,3 +24,20 @@
      - `sudo_roles`: 是否开启默认sudo 组策略 | `true|false` （只需要在第一次配置组的 sudo 权限是开启）
      - `user_passwd`: 用户密码
      - `add_group`: 是否添加组
+     
+ - 添加实例
+ 
+ ```json
+{
+  "user_name": "user6",
+  "user_passwd": "1qazxsw2",
+  "group_name": "dev_ops",
+  "user_id": "1006",
+  "group_id": "505",
+  "mail": "liuyulong@jiumiaodai.com",
+  "sudo_roles": false,
+  "create_group": false,
+  "create_user": true,
+  "add_group": true
+}
+```
