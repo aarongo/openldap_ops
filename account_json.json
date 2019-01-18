@@ -5,6 +5,7 @@
   "user_id": "1003",
   "group_id": "505",
   "mail": "liuyulong@jiumiaodai.com",
+  "sudo_roles": true,
   "create_group": true,
   "create_user": true,
   "add_group": true

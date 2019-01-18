@@ -1,0 +1,14 @@
+dn: cn=%{{ group_name }},ou=sudoers,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+objectClass: sudoRole
+objectCLass: top
+cn: %base_sudo
+sudoUser: %base_sudo
+sudoHost: ALL
+sudoRunAsUser: ALL
+sudoOption: !authenticate
+sudoCommand: /bin/bash
+sudoCommand: /bin/chmod
+sudoCommand: /bin/chown
+sudoCommand: /bin/mv
+sudoCommand: /usr/bin/vim
+sudoCommand: /usr/bin/passwd

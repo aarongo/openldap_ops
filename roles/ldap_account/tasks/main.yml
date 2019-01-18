@@ -10,3 +10,7 @@
 - name: add user to exist group
   include: existing_group.yml
   when: add_group
+
+- name: add sudo role
+  include: sudo_roles.yml
+  when: sudo_roles

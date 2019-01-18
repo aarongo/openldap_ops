@@ -1,0 +1,12 @@
+---
+- name: 配置默认匹配sudo 组策略
+  template:
+    src: sudo_groups.ldif.j2
+    dest: /tmp/sudo_groups.ldif
+
+- name: 应用 sudo 组策略
+  shell: ldapadd -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/sudo_groups.ldif
+  register: sudo_result
+
+- debug:
+    msg: "{{ sudo_result.stdout_lines }}"
