@@ -1,26 +1,40 @@
 ---
-- name: copy base/ppolicy/acl config for ppolicy
+- name: 导入基础变量文件
+  include_vars: ppolicy.yml
+
+- name: 拷贝 base/ppolicy/acl 配置文件
   template:
     src: "{{ item.src }}"
     dest: "/tmp/{{ item.dest }}"
   with_items:
     - { src: "add_ppolicy.ldif.j2", dest: "add_ppolicy.ldif" }
     - { src: "ppolicy_org.ldif.j2", dest: "ppolicy_org.ldif" }
-    - { src: "ppolicy_acl.ldif", dest: "ppolicy_acl.ldif" }
+    - { src: "ppolicy_acl.ldif.j2", dest: "ppolicy_acl.ldif" }
 
-- name: setup base config
-  shell: "ldapadd -x -D 'cn=config' -w {{ ROOTPW }} -f {{ item }}"
-  with_items:
-    - /tmp/add_ppolicy.ldif
-    - /tmp/ppolicy_acl.ldif
+- name: 增加 ppolicy 的基础配置
+  shell: ldapadd -x -D 'cn=config' -w {{ ROOTPW }} -f /tmp/add_ppolicy.ldif
   register: base_result
 
 - debug:
     msg: "{{ base_result.stdout_lines }}"
 
-- name: add ppolicy group and default role
+- name: 增加 ppolicy 的默认策略与组信息
   shell: ldapadd -x -D 'cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}' -w {{ ROOTPW }} -f /tmp/ppolicy_org.ldif
   register: default_role
 
 - debug:
     msg: "{{ default_role.stdout_lines }}"
+
+- name: 配置普通用户可以更改密码
+  shell: ldapadd -x -D 'cn=config' -w {{ ROOTPW }} -f /tmp/ppolicy_acl.ldif
+  register: ac_result
+
+- debug:
+    msg: "{{ ac_result.stdout_lines }}"
+
+- name: 配置密码复杂度检测
+  copy:
+    src: check_password.conf
+    dest: "{{ openldap_path }}/check_password.conf"
+
+- include: restart_service.yml

@@ -60,10 +60,7 @@
     group: "{{ ldap_user }}"
     recurse: yes
 
-- name: restart slapd
-  systemd:
-    name: slapd
-    state: restarted
+- include: restart_service.yml
 
 - name: config web xml
   copy:

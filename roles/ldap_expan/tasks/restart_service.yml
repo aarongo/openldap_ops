@@ -1,0 +1,5 @@
+---
+- name: restart slapd service
+  systemd:
+    name: slapd
+    state: restarted

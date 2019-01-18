@@ -1,3 +1,4 @@
 ---
 ppolicy_default: default
-ppolicy_ou: Policies
+ppolicy_ou: PPolicies
+openldap_path: /etc/openldap
