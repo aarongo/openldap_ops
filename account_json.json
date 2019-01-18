@@ -1,12 +1,12 @@
 {
-  "user_name": "user4",
+  "user_name": "user6",
   "user_passwd": "1qazxsw2",
-  "group_name": "linux_users",
-  "user_id": "1003",
+  "group_name": "dev_ops",
+  "user_id": "1006",
   "group_id": "505",
   "mail": "liuyulong@jiumiaodai.com",
-  "sudo_roles": true,
-  "create_group": true,
+  "sudo_roles": false,
+  "create_group": false,
   "create_user": true,
   "add_group": true
 }

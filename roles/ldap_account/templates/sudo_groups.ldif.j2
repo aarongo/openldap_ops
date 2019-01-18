@@ -1,8 +1,8 @@
 dn: cn=%{{ group_name }},ou=sudoers,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
 objectClass: sudoRole
 objectCLass: top
-cn: %base_sudo
-sudoUser: %base_sudo
+cn: %{{ group_name }}
+sudoUser: %{{ group_name }}
 sudoHost: ALL
 sudoRunAsUser: ALL
 sudoOption: !authenticate
