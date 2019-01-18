@@ -1,0 +1,20 @@
+# 快速安装配置
+**ansible-playbook 00-setup.yml**
+```yaml
+- hosts: all
+  roles:
+    - { role: prepare}
+    - { role: chrony, CHRONY_NTP: true}
+
+# 服务端基础配置，开启 TSL/SSL、导入基本配置信息
+- hosts: server
+  roles:
+    - { role: ldap_server, install_server: true, ENABLE_SSL: true}
+    - { role: ldap_expan, add_memberof: true, add_web: true, sudo_ssh: true, ppolicy: true}
+
+# 客户端配置，开启 TSL/SSL、配置使用 sudo 与 ssh-key
+- hosts: clients
+  roles:
+    - { role: ldap_client, install_client: true}
+    - { role: support_ssh_sudo, support: true}
+```
