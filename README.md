@@ -45,7 +45,7 @@
 	  "group_name": "dev_ops",
 	  "user_id": "1005",
 	  "group_id": "505",
-	  "mail": "liuyulong@jiumiaodai.com",
+	  "mail": "xxx@xxx.com",
 	  "sudo_roles": true,
 	  "create_group": true,
 	  "create_user": true,
@@ -126,7 +126,7 @@ Last login: Thu Jan 17 21:11:51 2019 from 172.16.10.1
 
 	```bash
 	ssh user6@172.16.10.10
-user6@172.16.10.10's password:
-password will expire in 90 days
-Last login: Thu Jan 17 21:36:28 2019 from 172.16.10.1
+    user6@172.16.10.10's password:
+    password will expire in 90 days
+    Last login: Thu Jan 17 21:36:28 2019 from 172.16.10.1
 	```
