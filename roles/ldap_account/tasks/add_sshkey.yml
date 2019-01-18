@@ -1,0 +1,12 @@
+---
+- name: 拷贝ldif 文件
+  template:
+    src: add_sshkey.ldif.j2
+    dest: /tmp/add_sshkey.ldif
+
+- name: 增加用户idappublicky属性
+  shell: ldapmodify -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/add_sshkey.ldif
+  register: ssh_result
+
+- debug:
+    msg: "{{ ssh_result.stdout_lines }}"

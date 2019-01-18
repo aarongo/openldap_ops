@@ -14,3 +14,7 @@
 - name: add sudo role
   include: sudo_roles.yml
   when: sudo_roles
+
+- name: add ssh-key for user
+  include: add_sshkey.yml
+  when: add_sshkey
