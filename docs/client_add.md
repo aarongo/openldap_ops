@@ -9,6 +9,7 @@
 **support: true** 是否开启 `sudo` `ssh`支持
 
 - **ansible-playbook 06-addclient.yml**
+
     ```yaml
     - hosts: new_client
       roles:
