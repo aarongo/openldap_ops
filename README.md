@@ -61,14 +61,14 @@
 
 	```bash
 	ssh user5@172.16.10.10
-user5@172.16.10.10's password:
-You are required to change your password immediately (root enforced)
-need a new password
-Creating directory '/home/user5'.
-WARNING: Your password has expired.
-You must change your password now and login again!
-Changing password for user user5.
-(current) LDAP Password:
+	user5@172.16.10.10's password:
+	You are required to change your password immediately (root enforced)
+	need a new password
+	Creating directory '/home/user5'.
+	WARNING: Your password has expired.
+	You must change your password now and login again!
+	Changing password for user user5.
+	(current) LDAP Password:
 	```
 
 	**密码策略生效，首次登录需要更改密码**
@@ -80,9 +80,9 @@ Changing password for user user5.
 	passwd: all authentication tokens updated successfully.
 	# 使用新密码登录成功
 	ssh user5@172.16.10.10
-user5@172.16.10.10's password:
-Last login: Thu Jan 17 21:10:31 2019 from 172.16.10.1
-[user5@kubernetes-node1 ~]$
+	user5@172.16.10.10's password:
+	Last login: Thu Jan 17 21:10:31 2019 from 172.16.10.1
+	[user5@kubernetes-node1 ~]$
 	```
 
 3. 测试 sudo 规则
