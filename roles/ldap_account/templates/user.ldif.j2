@@ -10,6 +10,7 @@ shadowInactive: 7
 shadowWarning: 10
 givenName: {{ user_name }}
 cn: {{ user_name }}
+displayName: {{ display_name }}
 sn: Linux
 userPassword: {{ u_password.stdout_lines[0] }}
 loginShell: /bin/bash
@@ -18,4 +19,3 @@ uidNumber: {{ user_id }}
 gidNumber: {{ group_id }}
 homeDirectory: /home/{{ user_name }}
 mail: {{ mail }}
-pwdReset: TRUE

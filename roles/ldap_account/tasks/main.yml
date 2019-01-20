@@ -1,20 +1,20 @@
 ---
-- name: crate group
-  include: group_add.yml
-  when: create_group
-
-- name: create user
+- name: 创建用户
   include: user_add.yml
-  when: create_user
+  tags: create_user
 
-- name: add user to exist group
-  include: existing_group.yml
-  when: add_group
+- name: 创建用户组
+  include: group_add.yml
+  tags: create_group
 
-- name: add sudo role
-  include: sudo_roles.yml
-  when: sudo_roles
-
-- name: add ssh-key for user
+- name: 为用户增加 sshkey
   include: add_sshkey.yml
-  when: add_sshkey
+  tags: add_sshkey
+
+- name: 将用户添加到组
+  include: existing_group.yml
+  tags: exist_group
+
+- name: 增加 sudo 规则
+  include: sudo_roles.yml
+  tags: add_sudoroles
