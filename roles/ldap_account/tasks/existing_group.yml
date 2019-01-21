@@ -1,10 +1,10 @@
 ---
-- name: copy add user to group ldif
+- name: 拷贝增加用户到组的配置文件
   template:
     src: existing_group.ldif.j2
     dest: /tmp/existing_group.ldif
 
-- name: Add an user an existing group
+- name: 增加用户到指定组
   shell: ldapadd -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/existing_group.ldif
   register: exist_group
 
