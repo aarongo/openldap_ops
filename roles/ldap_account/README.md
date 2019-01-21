@@ -43,8 +43,11 @@
 
 ```json
 {
-    "group_name": "jenkins_groups",
-    "group_id": "510"
+    "ou_name": "jenkins",
+    "create_type": "cn",
+    "group_name": "Linux_users",
+    "level": "1",
+    "group_id": 504
 }
 ```
 
@@ -60,8 +63,10 @@
 
 ```json
 {
-    "group_name": "jenkins_groups",
-    "user_name": ["liuyulong","user1"]
+    "ou_name": "jenkins",
+    "group_name": "jenkins-users",
+    "user_name": ["liuhaoda"],
+    "level": "2"
 }
 ```
 
