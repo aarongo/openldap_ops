@@ -2,10 +2,10 @@
 172.16.10.220
 
 [clients]
-172.16.10.10
+172.16.10.10 node_name=client.node1.com
 
-#[new_client]
-#172.16.10.11
+[new_client]
+172.16.10.11 node_name=client.node2.com
 
 [chrony]
 172.16.10.220

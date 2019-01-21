@@ -1,4 +1,4 @@
 ---
 - hosts: clients
   roles:
-    - { role: ldap_client, install_client: true}
+    - { role: ldap_client, install_client: true, add_client: false}
