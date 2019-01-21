@@ -3,10 +3,16 @@
 
 # for ldap server
 {% for ip in groups['server'] %}
-{{ ip }} {{ SERVER_FQDN }} {{ hostvars[ip].ansible_hostname }}
+{{ ip }} {{ SERVER_FQDN }}
 {% endfor %}
 
 # for other hosts
 {% for ip in groups['clients'] %}
-{{ ip }} {{ hostvars[ip].ansible_hostname }}
+{{ ip }} {{ node_name }}
 {% endfor %}
+
+{% if add_client %}
+{% for ip in groups['new_client'] %}
+{{ ip }} {{ node_name }}
+{% endfor %}
+{% endif %}
