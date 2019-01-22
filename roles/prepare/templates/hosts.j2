@@ -1,18 +1,28 @@
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 
-# for ldap server
-{% for ip in groups['server'] %}
-{{ ip }} {{ SERVER_FQDN }}
+{% if (groups['server'] | length == 1) and (groups['chrony'][0] in groups['server']) %}
+{{ groups['server'][0] }} {{ SERVER_FQDN }} {{ hostvars[groups['server'][0]]['ansible_fqdn'] }} {{ CHRONY_FQDN }}
+{% else %}
+{% for host in groups['server'] %}
+{{ host }} {{ hostvars[host]['ansible_fqdn'] }}
 {% endfor %}
+{% endif %}
 
-# for other hosts
-{% for ip in groups['clients'] %}
-{{ ip }} {{ node_name }}
+{% if groups['clients'] | length == 1 %}
+{{ groups['clients'][0] }} {{ hostvars[groups['clients'][0]]['ansible_fqdn'] }}
+{% else %}
+{% for host in groups['clients'] %}
+{{ host }} {{ hostvars[host]['ansible_fqdn'] }}
 {% endfor %}
+{% endif %}
 
 {% if add_client %}
-{% for ip in groups['new_client'] %}
-{{ ip }} {{ node_name }}
+{% if groups['new_client'] | length == 1 %}
+{{ groups['new_client'][0] }} {{ hostvars[groups['new_client'][0]]['ansible_fqdn'] }}
+{% else %}
+{% for host in groups['new_client'] %}
+{{ host }} {{ hostvars[host]['ansible_fqdn'] }}
 {% endfor %}
+{% endif %}
 {% endif %}

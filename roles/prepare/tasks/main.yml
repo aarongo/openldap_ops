@@ -23,8 +23,8 @@
   args:
     warn: no
 
-#- name: Ensure the yum package index is up to Date
-#  yum:
-#    update_cache: yes
-#    name: '*'
-#    state: latest
+- name: Ensure the yum package index is up to Date
+  yum:
+    update_cache: yes
+    name: '*'
+    state: latest

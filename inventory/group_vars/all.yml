@@ -1,3 +1,4 @@
 SERVER_FQDN: laoshiren.ldapserver.com
+CHRONY_FQDN: chrony.server.com
 ROOTPW: K7KdHqkEed
 ldap_user: ldap
