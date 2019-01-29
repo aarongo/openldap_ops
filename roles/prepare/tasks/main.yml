@@ -1,9 +1,11 @@
 ---
 # config hosts file
-- name: Build hosts file
-  template:
-    src: hosts.j2
+- name: build hosts file
+  blockinfile:
+    block: "{{ lookup('template', 'hosts.j2') }}"
     dest: /etc/hosts
+    marker: "# {mark} ANSIBLE SETUP HOSTS"
+    backup: yes
 
 - name: check if epel is installed
   yum:

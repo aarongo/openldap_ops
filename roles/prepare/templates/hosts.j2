@@ -1,20 +1,49 @@
-127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-
+{% if ENABLE_CHRONY %}
 {% if (groups['server'] | length == 1) and (groups['chrony'][0] in groups['server']) %}
+# server
 {{ groups['server'][0] }} {{ SERVER_FQDN }} {{ hostvars[groups['server'][0]]['ansible_fqdn'] }} {{ CHRONY_FQDN }}
 {% else %}
 {% for host in groups['server'] %}
+{% if SERVER_FQDN == hostvars[host]['ansible_fqdn'] %}
+# server
 {{ host }} {{ hostvars[host]['ansible_fqdn'] }}
+{% else %}
+# server
+{{ host }} {{ SERVER_FQDN }}
+{% endif %}
+{% endfor %}
+{% for host in groups['chrony'] %}
+{% if CHRONY_FQDN == hostvars[host]['ansible_fqdn'] %}
+# chrony
+{{ host }} {{ hostvars[host]['ansible_fqdn'] }}
+{% else %}
+# chrony
+{{ host }}  {{ CHRONY_FQDN }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% else %}
+{% for host in groups['server'] %}
+{% if SERVER_FQDN == hostvars[host]['ansible_fqdn'] %}
+# server
+{{ host }} {{ hostvars[host]['ansible_fqdn'] }}
+{% else %}
+# server
+{{ host }} {{ SERVER_FQDN }}
+{% endif %}
 {% endfor %}
 {% endif %}
 
+{% if CLIENT %}
 {% if groups['clients'] | length == 1 %}
+# client
 {{ groups['clients'][0] }} {{ hostvars[groups['clients'][0]]['ansible_fqdn'] }}
 {% else %}
+# client
 {% for host in groups['clients'] %}
 {{ host }} {{ hostvars[host]['ansible_fqdn'] }}
 {% endfor %}
+{% endif %}
 {% endif %}
 
 {% if add_client %}

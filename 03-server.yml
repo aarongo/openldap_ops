@@ -1,6 +1,6 @@
 ---
 - hosts: server
   roles:
-    - { role: prepare}
-    - { role: chrony, CHRONY_NTP: true}
+    - { role: prepare, add_client: false, ENABLE_CHRONY: false, CLIENT: false}
+    - { role: chrony, CHRONY_NTP: false}
     - { role: ldap_server, install_server: true, ENABLE_SSL: true}
