@@ -1,0 +1,16 @@
+---
+# 增加定时备份管理
+- name: 拷贝定时任务文件
+  copy:
+    src: slapcat_backup.sh
+    dest: /etc/openldap/slapcat_backup.sh
+    mode: 0755
+
+- name: 为定时备份创建定时任务文件
+  cron:
+    name: ldap autobackup
+    minute: 0
+    hour: "*/6"
+    user: root
+    job: "/etc/openldap/slapcat_backup.sh"
+    cron_file: ansible_ldap-autobackup

@@ -13,3 +13,7 @@
 - name: add ppolicy
   include: add_ppolicy.yml
   when: ppolicy
+
+- name: add crontab
+  include: add_crontab.yml
+  when: crontab

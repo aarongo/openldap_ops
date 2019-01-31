@@ -1,5 +1,5 @@
 ---
 - hosts: server
   roles:
-    - { role: ldap_expan, add_memberof: true, add_web: true, sudo_ssh: true, ppolicy: true}
+    - { role: ldap_expan, add_memberof: true, add_web: true, sudo_ssh: true, ppolicy: true, crontab: true}
   become: true
