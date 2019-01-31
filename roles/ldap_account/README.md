@@ -74,7 +74,8 @@
 
 ```json
 {
-    "user_name": "liuyulong",
+    "user_name": "test2",
     "key_conents": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLtUWPMLPIgMTsgLL9ee1TXkqNjeK0yWwQpnj7b7Z1jcpck+DNzeR/qPM9r/t66UuBa8zxudxVPgZV6YfvsOGHM0NpAbVGBGMOj7MSzqeUyvd8vbkS/lZ+uxYmPz22gcVnT406PPqPimixu2I6YoFN/B4Qkt0gszThv7rYKgZGiQG8RenafQUOEf7CB+Oak4rMSQFjYJPeDghTmQXYlQlMhY5GT8bTot1NglHftOloN2dyYjcbZUVtH7KxI3LDXjGFtC77msmjBpJgAagVBhUzY9/VT2pL/VYXREDVzGejZ2TLJTcCidaP7lMin+99sBSpwH/5aL5FynsRUDfhAD1D yuloong@YuLoongdeMacBook-Pro.local",
+    "add_sshkey": true
 }
 ```

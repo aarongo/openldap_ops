@@ -1,7 +1,8 @@
 ---
 - name: 生成用户密码
-  shell: slappasswd -h {SSHA} -s {{ user_passwd }}
+  shell: /usr/sbin/slappasswd -h {SSHA} -s {{ user_passwd }}
   register: u_password
+
 
 - name: 拷贝 ldif 文件
   template:

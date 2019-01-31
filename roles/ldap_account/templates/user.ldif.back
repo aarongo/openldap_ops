@@ -3,6 +3,11 @@ objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
+shadowLastChange: 0
+shadowMin: 0
+shadowMax: 90
+shadowInactive: 7
+shadowWarning: 10
 givenName: {{ user_name }}
 cn: {{ user_name }}
 displayName: {{ display_name }}
