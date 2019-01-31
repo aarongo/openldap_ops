@@ -1,0 +1,13 @@
+---
+# 安装客户端时进行备份的系统配置
+- name: 停止 nslcd 服务
+  systemd:
+    name: nslcd
+    state: stoped
+
+- name: 恢复 authconfig 配置
+  shell: "authconfig --restorebackup=systemconfig.bak"
+  register: restore_result
+
+- debug:
+    msg: "{{ restore_result.stdout_lines }}"

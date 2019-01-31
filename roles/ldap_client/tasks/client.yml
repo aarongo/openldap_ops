@@ -6,18 +6,24 @@
     state: latest
   with_items: "{{ PACKAGES_CLIENTS }}"
 
+- name: authconfig backup to file
+  shell: "authconfig --savebackup=systemconfig.bak"
+  register: backup_result
+
 - name: auto config for ldap client
   shell: "authconfig {{ authconfig_command }}"
   register: auth_result
 
+- debug:
+    msg: "{{ backup_result.stdout_lines }}"
+
+- debug:
+    msg: "{{ auth_result.stdout_lines }}"
 
 - name: copy key files to client
   get_url:
     url: "http://{{ SERVER_FQDN }}/cert.crt"
     dest: "{{ client_cacerts }}/cert.crt"
-
-- debug:
-    msg: "{{ auth_result.stdout_lines }}"
 
 - name: copy client ldap config for enable TLS/SSL
   template:

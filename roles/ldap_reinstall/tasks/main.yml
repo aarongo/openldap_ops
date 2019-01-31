@@ -1,0 +1,8 @@
+---
+- name: 卸载 server 端
+  include: server.yml
+  when: uninstall_server
+
+- name: 卸载 client 端
+  include: client.yml
+  when: uninstall_client

@@ -1,0 +1,4 @@
+---
+- hosts: {{ type_server }}
+  roles:
+    - ldap_reinstall

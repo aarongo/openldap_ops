@@ -1,0 +1,23 @@
+---
+# 卸载 LDAP Server （由于 openldap 软件不能卸载，与系统 yum、systemd 关联不能进行直接卸载，所以只需要重新安装即可
+
+- name: 导入变量
+  include_vars: server.yml
+
+- name: 停止 slapd 服务
+  systemd:
+    name: slapd
+    state: stopped
+
+- name: 删除openldap 目录
+  file:
+    path: /etc/openldap
+    state: absent
+  with_items:
+    - "/etc/openldap"
+    - "/var/lib/ldap"
+
+- name: 重新安装 openldap 等软件
+  shell: yum reinstall {{ item }}
+  with_items: "{{ PACKAGES_SERVER }}"
+  warn: no
