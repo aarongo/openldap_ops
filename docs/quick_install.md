@@ -1,4 +1,7 @@
 # 快速安装配置
+## 安装列表
+![](https://d-img.oss-cn-shenzhen.aliyuncs.com/markdown/2019-01-31-021826.png)
+
 **ansible-playbook 00-setup.yml**
 ```yaml
 - hosts: all
