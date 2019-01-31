@@ -1,5 +1,7 @@
-SERVER_FQDN:
-  - ldapserver.node1.com
-CHRONY_FQDN: chrony.server.com
-ROOTPW: K7KdHqkEed
+CLUSTER_FQDN:
+  - master.node1.com
+  - master.node2.com
+SERVER_FQDN: ldapserver.jiumiaodai.com
+CHRONY_FQDN: chrony.jiumiaodai.com
+ROOTPW: /^7Ur369ahEFvWvxy6qd
 ldap_user: ldap
