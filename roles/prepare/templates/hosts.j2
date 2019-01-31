@@ -3,9 +3,9 @@
 
 {# chrony ip 与 server 相同 #}
 {% if groups['server'][0] == (groups['chrony'][0]) %}
-{{ groups['server'][0] }} {{ SERVER_FQDN[0] }} {{ CHRONY_FQDN }}
+{{ groups['server'][0] }} {{ SERVER_FQDN }} {{ CHRONY_FQDN }}
 {% else %}
-{{ groups['server'][0] }} {{ SERVER_FQDN[0] }}
+{{ groups['server'][0] }} {{ SERVER_FQDN }}
 {{ groups['chrony'][0] }} {{ CHRONY_FQDN }}
 {% endif %}
 {# chrony ip 与 server 相同---end #}
@@ -17,9 +17,9 @@
 {% set outer_loop = loop.index %}
 {# server有多个IP，chrony 是其中之一时 #}
 {% if groups['chrony'][0] == host %}
-{{ host }} {{ SERVER_FQDN[outer_loop-1] }} {{ CHRONY_FQDN }}
+{{ host }} {{ CLUSTER_FQD[outer_loop-1] }} {{ CHRONY_FQDN }}
 {% else %}
-{{ host }} {{ SERVER_FQDN[outer_loop-1] }}
+{{ host }} {{ CLUSTER_FQD[outer_loop-1] }}
 {% endif %}
 {% endfor %}
 
