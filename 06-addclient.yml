@@ -5,3 +5,5 @@
     - { role: chrony, CHRONY_NTP: true}
     - { role: ldap_client, install_client: true}
     - { role: support_ssh_sudo, support: true}
+  become: yes
+  become_user: root

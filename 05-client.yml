@@ -2,3 +2,6 @@
 - hosts: clients
   roles:
     - { role: ldap_client, install_client: true, add_client: false}
+    - { role: support_ssh_sudo, support: true}
+  become: true
+  become_user: root
