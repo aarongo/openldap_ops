@@ -18,3 +18,7 @@
     - { role: ldap_client, install_client: true}
     - { role: support_ssh_sudo, support: true}
 ```
+
+## 独立安装
+
+**注:** 独立进行安装过程中 都需要首先执行`prepare`进行初始化配置，排除新增客户端时已经集成了`prepare`
