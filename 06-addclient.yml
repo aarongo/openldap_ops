@@ -1,7 +1,5 @@
 ---
 - hosts: new_client
-  vars:
-    add_client: true
   roles:
     - { role: prepare}
     - { role: chrony, CHRONY_NTP: true}

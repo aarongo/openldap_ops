@@ -1,7 +1,7 @@
 ---
 - hosts: all
   roles:
-    - { role: prepare, add_client: false}
+    - { role: prepare}
     - { role: chrony, CHRONY_NTP: true}
 
 # 服务端基础配置，开启 TSL/SSL、导入基本配置信息

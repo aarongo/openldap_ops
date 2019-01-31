@@ -1,57 +1,27 @@
-{% if ENABLE_CHRONY %}
-{% if (groups['server'] | length == 1) and (groups['chrony'][0] in groups['server']) %}
-# server
-{{ groups['server'][0] }} {{ SERVER_FQDN }} {{ hostvars[groups['server'][0]]['ansible_fqdn'] }} {{ CHRONY_FQDN }}
-{% else %}
-{% for host in groups['server'] %}
-{% if SERVER_FQDN == hostvars[host]['ansible_fqdn'] %}
-# server
-{{ host }} {{ hostvars[host]['ansible_fqdn'] }}
-{% else %}
-# server
-{{ host }} {{ SERVER_FQDN }}
-{% endif %}
-{% endfor %}
-{% for host in groups['chrony'] %}
-{% if CHRONY_FQDN == hostvars[host]['ansible_fqdn'] %}
-# chrony
-{{ host }} {{ hostvars[host]['ansible_fqdn'] }}
-{% else %}
-# chrony
-{{ host }}  {{ CHRONY_FQDN }}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% else %}
-{% for host in groups['server'] %}
-{% if SERVER_FQDN == hostvars[host]['ansible_fqdn'] %}
-# server
-{{ host }} {{ hostvars[host]['ansible_fqdn'] }}
-{% else %}
-# server
-{{ host }} {{ SERVER_FQDN }}
-{% endif %}
-{% endfor %}
-{% endif %}
+{# server ip 只有一个ip #}
+{% if (groups['server'] | length == 1) %}
 
-{% if CLIENT %}
-{% if groups['clients'] | length == 1 %}
-# client
-{{ groups['clients'][0] }} {{ hostvars[groups['clients'][0]]['ansible_fqdn'] }}
+{# chrony ip 与 server 相同 #}
+{% if groups['server'][0] == (groups['chrony'][0]) %}
+{{ groups['server'][0] }} {{ SERVER_FQDN[0] }} {{ CHRONY_FQDN }}
 {% else %}
-# client
-{% for host in groups['clients'] %}
-{{ host }} {{ hostvars[host]['ansible_fqdn'] }}
-{% endfor %}
+{{ groups['server'][0] }} {{ SERVER_FQDN[0] }}
+{{ groups['chrony'][0] }} {{ CHRONY_FQDN }}
 {% endif %}
-{% endif %}
+{# chrony ip 与 server 相同---end #}
 
-{% if add_client %}
-{% if groups['new_client'] | length == 1 %}
-{{ groups['new_client'][0] }} {{ hostvars[groups['new_client'][0]]['ansible_fqdn'] }}
+{# server ip 有多个 #}
 {% else %}
-{% for host in groups['new_client'] %}
-{{ host }} {{ hostvars[host]['ansible_fqdn'] }}
+
+{% for host in groups['server'] %}
+{% set outer_loop = loop.index %}
+{# server有多个IP，chrony 是其中之一时 #}
+{% if groups['chrony'][0] == host %}
+{{ host }} {{ SERVER_FQDN[outer_loop-1] }} {{ CHRONY_FQDN }}
+{% else %}
+{{ host }} {{ SERVER_FQDN[outer_loop-1] }}
+{% endif %}
 {% endfor %}
+
 {% endif %}
-{% endif %}
+{# server ip 只有一个ip 时--end #}
