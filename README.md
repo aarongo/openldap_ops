@@ -37,7 +37,7 @@
 ## 测试
 1. 创建用户、组
     
-    [点我看具体详情](./ldap_account/README.md)
+    [点我看具体详情](./roles/ldap_account/README.md)
 
 	**web**查看效果
 
