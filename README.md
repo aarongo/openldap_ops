@@ -21,12 +21,13 @@
 | 可选添加模块 | 自行选择安装所需模块 | 根据实际情况进行模块的选择 |
 | 自动添加 client | 可自动对客户端进行安装配置 | 配置 housts 进行 client 增加 |
 | 添加用户与组 | 可自行添加所需用户与组 | 根据需求添加必要的组与用户 |
+| 卸载LDAPserver 与 client | 自行选择卸载的服务器类型 | 因为一些原因 server 只是初始化安装 |
 
 ## 安装指南
 
 | [快速安装](./docs/quick_install.md) | [基础配置安装](./docs/prepare_install.md) | [时钟同步](./docs/chrony_config.md) | [服务端安装](./docs/server_install.md)| [命令行使用](./docs/base_command.md)|
 | :---: | :---: | :---: | :---: | :---: | 
-| [扩展功能安装](./docs/plugin_add.md) | [客户端安装配置](./docs/client_install.md)  | [添加客户端](./docs/client_add.md) | [自定义用户添加](./docs/account_handle.md) |  |
+| [扩展功能安装](./docs/plugin_add.md) | [客户端安装配置](./docs/client_install.md)  | [添加客户端](./docs/client_add.md) | [自定义用户添加](./docs/account_handle.md) | [卸载](./docs/reinstall_ldap.md) |
 
 
 ## 安装效果
