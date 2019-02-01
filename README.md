@@ -36,23 +36,8 @@
 
 ## 测试
 1. 创建用户、组
-
-	```bash
-	ansible-playbook 07-addaccount.yml --extra-vars "@account_json.json"
-	cat account_json.json
-	{
-	  "user_name": "user5",
-	  "user_passwd": "1qazxsw2",
-	  "group_name": "dev_ops",
-	  "user_id": "1005",
-	  "group_id": "505",
-	  "mail": "xxx@xxx.com",
-	  "sudo_roles": true,
-	  "create_group": true,
-	  "create_user": true,
-	  "add_group": true
-	}
-	```
+    
+    [点我看具体详情](./ldap_account/README.md)
 
 	**web**查看效果
 
