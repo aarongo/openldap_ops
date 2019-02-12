@@ -1,0 +1,15 @@
+{% if level == '1' %}
+dn: cn={{ group_name }},ou=Groups,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+changetype: modify
+delete: memberuid
+{% for name in user_name %}
+memberuid: {{ name }}
+{% endfor %}
+{% elif level == '2' %}
+dn: cn={{ group_name }},ou={{ ou_name }},ou=Groups,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+changetype: modify
+delete: memberuid
+{% for name in user_name %}
+memberuid: {{ name }}
+{% endfor %}
+{% endif %}

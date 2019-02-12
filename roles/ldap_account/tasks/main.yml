@@ -18,3 +18,15 @@
 - name: 增加 sudo 规则
   include: sudo_roles.yml
   tags: add_sudoroles
+
+- name: 删除用户
+  include: delete_user.yml
+  tags: remove_user
+
+- name: 删除组
+  include: delete_group.yml
+  tags: remove_group
+
+- name: 删除组内成员
+  include: delete_user_from_group.yml
+  tags: remove_user_from_group

@@ -1,0 +1,13 @@
+---
+# 删除 OU=Groups 下的其他 ou
+- name: 拷贝删除组内用户文件
+  template:
+    src: remove_user_from_group.ldif.j2
+    dest: /tmp/remove_user_from_group.ldif
+
+- name: 在 Groups 下创建 OU 组
+  shell: ldapadd -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/remove_user_from_group.ldif
+  register: remove_result
+
+- debug:
+    msg: "{{ remove_result.stdout_lines }}"

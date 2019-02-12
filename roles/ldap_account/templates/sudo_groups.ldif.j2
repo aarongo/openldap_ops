@@ -4,11 +4,10 @@ objectCLass: top
 cn: %{{ group_name }}
 sudoUser: %{{ group_name }}
 sudoHost: ALL
-sudoRunAsUser: ALL
+sudoRunAsUser: root
 sudoOption: !authenticate
 sudoCommand: /bin/bash
 sudoCommand: /bin/chmod
 sudoCommand: /bin/chown
 sudoCommand: /bin/mv
 sudoCommand: /usr/bin/vim
-sudoCommand: /usr/bin/passwd
