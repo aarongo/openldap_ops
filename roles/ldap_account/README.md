@@ -43,12 +43,11 @@
 
  ```json
 {
-    "user_name": "liuyulong",
-    "display_name": "jenkins_user1",
+    "user_name": ["lyl_test"],
     "user_passwd": "1qazxsw2",
-    "user_id": "1010",
-    "group_id": "510",
-    "mail": "jenkins_user1@qq.com"
+    "user_id": "150",
+    "group_id": "501",
+    "comment": "userid 在创建的时候需要配置不同的开头 ID, gid 需要配置不同的组 id 从创建组时指定 jqbkj_manager=150, jqbkj_dev_team-leader=151,jqbkj_operations=152, jqbkj_dev=153, jqbkj_test=154"
 }
 ```
 **create_group.json**
@@ -67,7 +66,7 @@
 
 ```json
 {
-    "group_name": "liuyulong"
+    "group_name": "test"
 }
 ```
 
@@ -77,7 +76,7 @@
 {
     "ou_name": "jenkins",
     "group_name": "jenkins-users",
-    "user_name": ["liuhaoda"],
+    "user_name": ["test"],
     "level": "2"
 }
 ```
