@@ -3,7 +3,7 @@ sshkey_command=`which ssh-keygen`
 sshkey_file_path=~/.ssh
 ldap_server="ldapserver.jiumiaodai.com"
 ldap_dc="$(cut -d'.' -f1 <<<"${ldap_server}")"
-general_file_name=/tmp/new_addsshkey.ldif
+general_file_name=/tmp/${USER}.ldif
 ldap_server_passwd="/^7Ur369ahEFvWvxy6qd"
 
 general_file(){
