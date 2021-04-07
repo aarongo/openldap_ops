@@ -1,0 +1,7 @@
+{
+    "user_name": ["ftp"],
+    "user_passwd": "123456",
+    "user_id": "200",
+    "group_id": "505",
+    "comment": "userid 在创建的时候需要配置不同的开头 ID, gid 需要配置不同的组 id 从创建组时指定 jqbkj_manager=150, jqbkj_dev_team-leader=151,jqbkj_operations=152, jqbkj_dev=153, jqbkj_test=154"
+}
