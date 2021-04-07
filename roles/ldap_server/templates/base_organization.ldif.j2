@@ -1,11 +1,11 @@
-dn: ou={{ ORG_USER }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: ou={{ ORG_USER }},dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 objectClass: organizationalUnit
 ou: {{ ORG_USER }}
 
-dn: ou={{ ORG_GROUP }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: ou={{ ORG_GROUP }},dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 objectClass: organizationalUnit
 ou: {{ ORG_GROUP }}
 
-dn: ou={{ ORG_MANAGERS }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: ou={{ ORG_managerS }},dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 objectClass: organizationalUnit
-ou: {{ ORG_MANAGERS }}
+ou: {{ ORG_managerS }}

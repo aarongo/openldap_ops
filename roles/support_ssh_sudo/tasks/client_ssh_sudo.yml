@@ -4,7 +4,7 @@
     path: /etc/sudo-ldap.conf
     block: |
       uri ldap://{{ SERVER_FQDN }}
-      sudoers_base ou={{ org_sudo }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+      sudoers_base ou={{ org_sudo }},dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 
 - name: setup client support ssh
   blockinfile:

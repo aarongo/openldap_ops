@@ -1,7 +1,7 @@
 CLUSTER_FQDN:
   - master.node1.com
   - master.node2.com
-SERVER_FQDN: ldapserver.jiumiaodai.com
-CHRONY_FQDN: chrony.jiumiaodai.com
-ROOTPW: /^7Ur369ahEFvWvxy6qd
+SERVER_FQDN: ldap-server.magic.com
+CHRONY_FQDN: chrony.magic.com
+ROOTPW: root123
 ldap_user: ldap

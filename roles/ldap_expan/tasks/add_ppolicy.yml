@@ -19,7 +19,7 @@
     msg: "{{ base_result.stdout_lines }}"
 
 - name: 增加 ppolicy 的默认策略与组信息
-  shell: ldapadd -x -D 'cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}' -w {{ ROOTPW }} -f /tmp/ppolicy_org.ldif
+  shell: ldapadd -x -D 'cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}' -w {{ ROOTPW }} -f /tmp/ppolicy_org.ldif
   register: default_role
 
 - debug:

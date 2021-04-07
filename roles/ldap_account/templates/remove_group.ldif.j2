@@ -1,10 +1,10 @@
 {% if create_type == 'ou' %}
-dn: ou={{ ou_name }},ou=Groups,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: ou={{ ou_name }},ou=Groups,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 changetype: delete
 {% elif (create_type == 'cn') and (level == '1') %}
-dn: cn={{ group_name }},ou=Groups,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: cn={{ group_name }},ou=Groups,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 changetype: delete
 {% elif (create_type == 'cn') and (level == '2') %}
-dn: cn={{ group_name }},ou={{ ou_name }},ou=Groups,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: cn={{ group_name }},ou={{ ou_name }},ou=Groups,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 changetype: delete
 {% endif %}

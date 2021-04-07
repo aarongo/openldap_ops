@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 sshkey_command=`which ssh-keygen`
 sshkey_file_path=~/.ssh
-ldap_server="ldapserver.jiumiaodai.com"
+ldap_server="ldap-server.magic.com"
 ldap_dc="$(cut -d'.' -f1 <<<"${ldap_server}")"
 general_file_name=/tmp/${USER}.ldif
 ldap_server_passwd="/^7Ur369ahEFvWvxy6qd"
@@ -18,7 +18,7 @@ EOF
 
 # Add sshkey to ldap server for user
 add_sshkey(){
-    ldapmodify -x -D "cn=Manager,dc=${ldap_dc},dc=com" -w ${ldap_server_passwd} -f ${general_file_name}
+    ldapmodify -x -D "cn=manager,dc=${ldap_dc},dc=com" -w ${ldap_server_passwd} -f ${general_file_name}
 }
 
 setup_alias(){
@@ -30,7 +30,7 @@ source ~/.bashrc
 
 if [[ ! -f "${sshkey_file_path}/${USER}.pub" ]] && [[ ${USER} != "root" ]];then
     echo "The current user is ${USER}"
-    ${sshkey_command} -f ${sshkey_file_path}/${USER} -C "${USER}@jiumiaodai.com" -N '' -q
+    ${sshkey_command} -f ${sshkey_file_path}/${USER} -C "${USER}@mmail.com" -N '' -q
     general_file
     add_sshkey
     setup_alias

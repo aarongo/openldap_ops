@@ -1,12 +1,12 @@
 # enable broad permissions for LDAP administrators
 access to *
-    by dn="cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" write
-    by dn.children="ou=Managers,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" write
+    by dn="cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}" write
+    by dn.children="ou=managers,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}" write
     by * read
 
 access to attrs=userPassword,shadowLastChange
-    by dn="cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" write
-    by dn.children="ou=Managers,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" write
+    by dn="cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}" write
+    by dn.children="ou=managers,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}" write
     by anonymous auth
     by self write
     by * none

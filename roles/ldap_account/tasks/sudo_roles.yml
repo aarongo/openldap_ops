@@ -5,7 +5,7 @@
     dest: /tmp/sudo_groups.ldif
 
 - name: 应用 sudo 组策略
-  shell: ldapadd -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/sudo_groups.ldif
+  shell: ldapadd -x -D "cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/sudo_groups.ldif
   register: sudo_result
 
 - debug:

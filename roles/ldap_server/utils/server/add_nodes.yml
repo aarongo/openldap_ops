@@ -5,7 +5,7 @@
     dest: /tmp/base_organization.ldif
 
 - name: Add base organization for ldap-server
-  shell: ldapadd -x -D 'cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}' -w {{ ROOTPW }} -f /tmp/base_organization.ldif
+  shell: ldapadd -x -D 'cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}' -w {{ ROOTPW }} -f /tmp/base_organization.ldif
   register: org_base
 
 - debug:

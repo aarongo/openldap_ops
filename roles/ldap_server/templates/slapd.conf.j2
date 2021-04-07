@@ -15,12 +15,12 @@ rootdn          "cn=config"
 rootpw          {{ root_password.stdout }}
 
 database        monitor
-rootdn          "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}"
+rootdn          "cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}"
 
 # 管理增加用户信息等操作权限和库
 database        hdb
-suffix          "dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}"
-rootdn          "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}"
+suffix          "dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}"
+rootdn          "cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}"
 rootpw          {{ root_password.stdout }}
 #This directory has to be created and would contain the ldap database.
 directory       /var/lib/ldap/

@@ -1,6 +1,6 @@
 {% for name in user_name %}
 {% if loop.index == loop.length %}
-dn: uid={{ name }},ou=Users,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: uid={{ name }},ou=Users,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
@@ -15,9 +15,9 @@ uid: {{ name }}
 uidNumber: {{ user_id }}{{ loop.index }}
 gidNumber: {{ group_id }}
 homeDirectory: /home/{{ name }}
-mail: {{ name }}@jiumiaodai.com
+mail: {{ name }}@mmail.com
 {% else %}
-dn: uid={{ name }},ou=Users,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: uid={{ name }},ou=Users,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
@@ -32,7 +32,7 @@ uid: {{ name }}
 uidNumber: {{ user_id }}{{ loop.index }}
 gidNumber: {{ group_id }}
 homeDirectory: /home/{{ name }}
-mail: {{ name }}@jiumiaodai.com
+mail: {{ name }}@mmail.com
 
 {% endif %}
 {% endfor %}

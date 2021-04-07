@@ -1,4 +1,4 @@
-dn: cn=%{{ group_name }},ou=sudoers,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: cn=%{{ group_name }},ou=sudoers,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 objectClass: sudoRole
 objectCLass: top
 cn: %{{ group_name }}

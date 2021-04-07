@@ -1,6 +1,6 @@
 SASL_NOCANON	on
 URI ldap://{{ SERVER_FQDN }}
-BASE dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+BASE dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 TLS_CACERTDIR {{ client_cacerts }}
 TLS_CACERT {{ client_cacerts }}/cert.crt
 TLS_REQCERT never

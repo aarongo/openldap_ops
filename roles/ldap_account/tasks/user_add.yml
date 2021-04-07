@@ -10,7 +10,7 @@
     dest: /tmp/user.ldif
 
 - name: 创建用户
-  shell: ldapadd -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/user.ldif
+  shell: ldapadd -x -D "cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/user.ldif
   register: create_result
 
 - debug:

@@ -1,9 +1,9 @@
-dn: ou={{ ppolicy_ou }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: ou={{ ppolicy_ou }},dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 objectClass: organizationalUnit
 objectClass: top
 ou: {{ ppolicy_ou }}
 
-dn: cn={{ ppolicy_default }},ou={{ ppolicy_ou }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: cn={{ ppolicy_default }},ou={{ ppolicy_ou }},dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 cn: {{ ppolicy_default }}
 objectClass: top
 objectClass: device

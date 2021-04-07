@@ -1,4 +1,4 @@
-BASE	dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+BASE	dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 {% if ENABLE_SSL %}
 URL ldap://{{ SERVER_FQDN }}
 TLS_CACERTDIR	{{ app_path }}/certs

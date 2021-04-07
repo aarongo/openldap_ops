@@ -6,7 +6,7 @@
     dest: /tmp/remove_user_from_group.ldif
 
 - name: 在 Groups 下创建 OU 组
-  shell: ldapadd -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/remove_user_from_group.ldif
+  shell: ldapadd -x -D "cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/remove_user_from_group.ldif
   register: remove_result
 
 - debug:

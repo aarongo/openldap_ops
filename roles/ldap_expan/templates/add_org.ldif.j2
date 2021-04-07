@@ -1,8 +1,8 @@
-dn: ou={{ org_sudo }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: ou={{ org_sudo }},dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 objectClass: organizationalUnit
 ou: {{ org_sudo }}
 
-dn: cn=defaults,ou={{ org_sudo }},dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}
+dn: cn=defaults,ou={{ org_sudo }},dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}
 objectClass: sudoRole
 objectCLass: top
 cn: defaults

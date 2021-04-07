@@ -1,5 +1,5 @@
 [server]
-172.16.10.10
+ldap-server.host.com
 
 [clients]
 172.16.10.11

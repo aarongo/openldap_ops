@@ -78,7 +78,7 @@
     dest: /tmp/add_org.ldif
 
 - name: add sudoers groups and default sudo role for ldap server
-  shell: ldapadd -x -D 'cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}' -w {{ ROOTPW }} -f /tmp/add_org.ldif
+  shell: ldapadd -x -D 'cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}' -w {{ ROOTPW }} -f /tmp/add_org.ldif
   register: org_sudo
   ignore_errors: yes
 

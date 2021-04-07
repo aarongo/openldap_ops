@@ -5,7 +5,7 @@
     dest: /tmp/existing_group.ldif
 
 - name: 增加用户到指定组
-  shell: ldapadd -x -D "cn=Manager,dc={{ SERVER_FQDN.split('.')[0] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/existing_group.ldif
+  shell: ldapadd -x -D "cn=manager,dc={{ SERVER_FQDN.split('.')[1] }},dc={{ SERVER_FQDN.split('.')[2] }}" -w {{ ROOTPW }} -f /tmp/existing_group.ldif
   register: exist_group
 
 - debug:
