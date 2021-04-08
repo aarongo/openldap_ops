@@ -1,5 +1,0 @@
-*.retry
-*.json
-problem.txt
-*.cfg
-inventory/hosts
